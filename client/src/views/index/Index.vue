@@ -1,10 +1,15 @@
 <template>
-  <div class="add">div</div>
+  <div class="add">
+    <GlobalHeader></GlobalHeader>
+  </div>
 </template>
 
 <script>
+import GlobalHeader from '@/components/GlobalHeader.vue'
+
 export default {
   name: 'Index',
+  components: { GlobalHeader },
   data() {
     return {}
   },

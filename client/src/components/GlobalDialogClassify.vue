@@ -5,7 +5,7 @@
 export default {
   name: 'global-dialog-classify',
   props: {
-    
+
   },
   data() {
     return {}
