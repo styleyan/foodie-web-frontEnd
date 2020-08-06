@@ -1,28 +1,27 @@
 <template>
-  <div class="header">
-		<div class="header-top">
-			<div class="header-top-l">
+  <div class="global-header">
+    <div class="header-top">
+      <div class="header-top-l">
         <template v-show="!userIsLogin">
-					<a href="#" class="h">亲，请登录</a>
+          <a href="#" class="h">亲，请登录</a>
           <a href="#">免费注册</a>
-				</template>
+        </template>
         <span v-show="userIsLogin" style="color: #d2364c">欢迎，{{userInfo.username}}</span>
-			</div>
-			<div class="header-top-r">
+      </div>
+      <div class="header-top-r">
         <a href="#">商城首页</a>
         <a @click="goUserCenter"><i class="iconfont icon-user-center"></i>个人中心</a>
-			</div>
-		</div>
-
-		<!--悬浮搜索框-->
-		<div class="header-search">
+      </div>
+    </div>
+    <!--悬浮搜索框-->
+    <div class="header-search">
       <img class="logo" :src="logoBig" />
       <div class="wrap-search">
         <input v-model="keywords" class="search-input" type="text" placeholder="请输入商品名" autocomplete="off">
         <input @click="doSearch" class="search-buttom" value="搜索">
       </div>
-		</div>
-	</div>
+    </div>
+  </div>
 </template>
 <script>
 import logoBig from '@/assets/images/logobig.png'
@@ -44,8 +43,9 @@ export default {
 }
 </script>
 <style lang="stylus">
-.header{
+.global-header{
   overflow hidden
+  margin-bottom 26px
 }
 .header-top{
   overflow hidden
