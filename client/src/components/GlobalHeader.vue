@@ -40,7 +40,11 @@ export default {
   },
   methods: {
     goUserCenter() {},
-    doSearch() {},
+    doSearch() {
+      this.$router.push({
+        name: 'search',
+      })
+    },
   },
 }
 </script>
