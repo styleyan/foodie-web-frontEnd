@@ -1,45 +1,27 @@
 <template>
-    <div class="hmtop">
-		<!--顶部导航条 -->
-		<div class="am-container header">
-			<ul class="message-l">
-				<div class="topMessage">
-					<div class="menu-hd" v-show="!userIsLogin">
-						<a class="h">亲，请登录</a>
-						<a>免费注册</a>
-					</div>
-					<div class="menu-hd" v-show="userIsLogin">
-						<span style="color: #d2364c">欢迎，{{userInfo.username}}</span>
-					</div>
-				</div>
-			</ul>
-			<ul class="message-r">
-				<div class="topMessage home">
-					<div class="menu-hd"><a target="_top" class="h">商城首页</a></div>
-				</div>
-				<div class="topMessage my-shangcheng">
-					<div class="menu-hd MyShangcheng"><a href="javascript:void(0);" @click="goUserCenter">
-						<i class="am-icon-user am-icon-fw"></i>个人中心</a></div>
-				</div>
-			</ul>
+  <div class="header">
+		<div class="header-top">
+			<div class="header-top-l">
+        <template v-show="!userIsLogin">
+					<a href="#" class="h">亲，请登录</a>
+          <a href="#">免费注册</a>
+				</template>
+        <span v-show="userIsLogin" style="color: #d2364c">欢迎，{{userInfo.username}}</span>
+			</div>
+			<div class="header-top-r">
+        <a href="#">商城首页</a>
+        <a @click="goUserCenter"><i class="iconfont icon-user-center"></i>个人中心</a>
+			</div>
 		</div>
 
 		<!--悬浮搜索框-->
-		<div class="nav white">
-			<!-- <div class="logo"><img src="images/logo.png" /></div> -->
-			<div class="logoBig">
-				<li><img src="images/logobig.png" /></li>
-			</div>
-			<div class="search-bar pr">
-				<a name="index_none_header_sysc" href="#"></a>
-				<form>
-					<input id="searchInput" v-model="keywords" name="index_none_header_sysc" type="text"
-						placeholder="搜索" autocomplete="off">
-					<input id="ai-topsearch" @click="doSearch" class="submit am-btn" value="搜索" index="1">
-				</form>
-			</div>
+		<div class="header-search">
+      <img class="logo" :src="logoBig" />
+      <div class="wrap-search">
+        <input v-model="keywords" class="search-input" type="text" placeholder="请输入商品名" autocomplete="off">
+        <input @click="doSearch" class="search-buttom" value="搜索">
+      </div>
 		</div>
-		<div class="clear"></div>
 	</div>
 </template>
 <script>
@@ -48,7 +30,72 @@ import logoBig from '@/assets/images/logobig.png'
 export default {
   name: 'GlobalHeader',
   data() {
-    return {}
+    return {
+      keywords: '',
+      logoBig,
+      userIsLogin: false,
+      userInfo: {},
+    }
+  },
+  methods: {
+    goUserCenter() {},
+    doSearch() {},
   },
 }
 </script>
+<style lang="stylus">
+.header{
+  overflow hidden
+}
+.header-top{
+  overflow hidden
+  width 1200px
+  margin 6px auto
+  font-size 14px
+  .header-top-l{
+    float left
+    a{
+      margin-right 8px
+    }
+  }
+  .header-top-r{
+    float right
+    a{
+      margin-left 8px
+    }
+  }
+}
+.header-search{
+  width 1000px;
+  margin 0 auto
+  .logo{
+    margin-right 36px
+  }
+  .wrap-search{
+    border: 2px solid #F03726;
+    max-width: 670px;
+    display inline-block
+  }
+  .search-input{
+    width 524px
+    height 46px
+    padding-left: 5px;
+    font-size: 12px;
+    border: none;
+    outline: none;
+  }
+  .search-buttom{
+    float: right;
+    width: 130px;
+    height: 46px;
+    color: #F5F5F2;
+    background: #F03726 none repeat scroll 0% 0%;
+    border-radius: 0px 0px;
+    border: none;
+    font-size 18px;
+    text-align center
+    outline: none;
+    cursor: pointer;
+  }
+}
+</style>

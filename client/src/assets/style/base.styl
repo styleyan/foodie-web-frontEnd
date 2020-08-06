@@ -1,27 +1,67 @@
-*{
-    padding: 0
-    margin: 0
+/*公共*/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+ font-family: arial,"Lantinghei SC","Microsoft Yahei";
 }
-body, html,#app,.el-container {
-  height 100%
-  width 100%
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section, main {
+	display: block;
+}
+ul,li,ol{ list-style:none;}
+dl,dd{ margin:auto;}
+
+.am-btn {font-size:12px ;}
+
+html{width:100%;
+	 height:100%;
+	-ms-text-size-adjust:none;
+	-webkit-text-size-adjust:none;
+	-moz-text-size-adjust:none;
+	-o-text-size-adjust:none;
+}
+/*text-size-adjust不管屏幕怎么变文字大小不变*/
+
+body{margin:0;
+	 padding:0;
+	 width:100%;
+	 font-size:12px;
+	 font-family: arial,"Lantinghei SC","Microsoft Yahei";
+
 }
 
+a:link,a:visited,a:hover{text-decoration:none; outline:none;}
+/*所有超链接不要下划线*/
 
-/* CSS Document */
-ul, li, ol {list-style: none;}
-[class*="am-u-"] {padding-left:0rem;padding-right:0rem;}
-.am-thumbnails {margin-left: 0rem;margin-right: 0rem;}
-.am-thumbnail {margin-bottom:0;}
-.am-thumbnails > li {padding: 0 0rem 0.2rem .2rem;}
-.am-container {padding-left:0px;padding-right:0px ;}
-.am-container > .am-g {margin-left: 0px;margin-right:0px ;}
-img{width:100%;}
-.slideall{background:#fff ;}
-.smallnav img,.smallnav a,.am-g.smallnav {border:none;}
-a:hover {color:#000000;}
-.e-price{color:red; font-size:14px;}
-.method3 img{border:none;}
-.method3 li{border:none;border-left:1px #e8e8e8 solid;border-top:1px #e8e8e8 solid}
-dt + dd {margin-top: 0;}
-.am-slider-default{margin-bottom: 0px;}
+*, *:after, *:before{
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-o-box-sizing: border-box;
+	box-sizing: border-box; }
+/*任何标签、包括它前面、后面生成的内容都不要影响盒子的边框*/
+
+.clear{ clear:both}
+
+img, input {
+    vertical-align: middle;}
+a {
+  color: #000;
+  text-decoration: none;
+}
