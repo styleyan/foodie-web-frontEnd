@@ -13,6 +13,5 @@ export default {
   width 100%
   height 432px
   background rgb(244 70 97)
-  border-top: 2px solid #d2364c;
 }
 </style>

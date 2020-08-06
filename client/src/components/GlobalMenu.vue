@@ -1,34 +1,48 @@
 <template>
-  <div class="global-menu">
-    <dl class="menu-item">
-      <dt>全部分类</dt>
-      <dd v-for="(item, key) in menus" :key="key">
-        <a :href="item.href">{{item.text}}</a>
-      </dd>
-    </dl>
-    <ul @mouseenter="enterHandle" @mouseleave="leaveHandle" class="menu-nav">
-      <li
-        v-for="(item, key) in navList"
-        :key="key"
-        :class="{'li-active': navActive === item.logo}"
-        @mouseenter="enterNavHandle(item)"
-        @mouseleave="leaveNavHandle(item)"
-      >
-        <i class="navs-size" :class="`navs-${item.logo}`"></i><span class="name">{{item.name}}</span><em>></em>
-      </li>
-    </ul>
-    <div @mouseenter="enterHandle" @mouseleave="leaveHandle" v-show="navShowStatus" class="nav-container">
-      <dl class="dl-sort">
-        <dt>巧克力</dt>
-        <dd><a href="#" target="_blank">黑巧克力</a></dd>
-        <dd><a href="#" target="_blank">水电费水电费是</a></dd>
+  <div style="border-bottom: 2px solid #d2364c;">
+    <div class="global-menu">
+      <dl class="menu-item">
+        <dt>{{redText}}</dt>
+        <dd v-for="(item, key) in menus" :key="key">
+          <a :href="item.href">{{item.text}}</a>
+        </dd>
       </dl>
+      <ul v-if="!isHideClassify" @mouseenter="enterHandle" @mouseleave="leaveHandle" class="menu-nav">
+        <li
+          v-for="(item, key) in navList"
+          :key="key"
+          :class="{'li-active': navActive === item.logo}"
+          @mouseenter="enterNavHandle(item)"
+          @mouseleave="leaveNavHandle(item)"
+        >
+          <i class="navs-size" :class="`navs-${item.logo}`"></i><span class="name">{{item.name}}</span><em>></em>
+        </li>
+      </ul>
+      <div @mouseenter="enterHandle" @mouseleave="leaveHandle" v-show="navShowStatus" class="nav-container">
+        <dl class="dl-sort">
+          <dt>巧克力</dt>
+          <dd><a href="#" target="_blank">黑巧克力</a></dd>
+          <dd><a href="#" target="_blank">水电费水电费是</a></dd>
+        </dl>
+      </div>
     </div>
   </div>
 </template>
 <script>
 export default {
   name: 'GlobalMenu',
+  props: {
+    // 是否隐藏分类
+    isHideClassify: {
+      type: Boolean,
+      default: false,
+    },
+    // 红色文案
+    redText: {
+      type: String,
+      default: '全部分类',
+    },
+  },
   data() {
     return {
       menus: [
