@@ -83,7 +83,7 @@ export default {
 <style lang="stylus">
 .global-menu{
   width 1200px
-  height 484px
+  height 45px
   margin 0 auto
   position relative
 
