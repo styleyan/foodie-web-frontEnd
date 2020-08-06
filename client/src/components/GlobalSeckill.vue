@@ -28,7 +28,7 @@ export default {
   height 260px
   color: #fff;
   background-color: #e83632;
-  background-image: url("~/assets/images/miaosha.png");
+  background-image: url("../assets/images/miaosha.png");
   background-size: contain;
   background-position: 50%;
   background-repeat: no-repeat;
