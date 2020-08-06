@@ -128,8 +128,8 @@ export default {
     box-shadow: 8px 0 7px -3px rgba(0,0,0,.3);
     li{
       position relative
-      height 45px
-      line-height 45px
+      height 43px
+      line-height 43px
       border-top: 1px solid #333;
       border-bottom: 1px solid #252525;
       text-align left
