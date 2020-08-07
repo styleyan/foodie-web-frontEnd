@@ -8,6 +8,14 @@
         <GlobalZoomImg style="float:left;margin-right:30px" :itemImgList="itemInfo.itemImgList"></GlobalZoomImg>
         <ItemAddCart></ItemAddCart>
       </div>
+      <div class="item-detail-box">
+        <ul class="item-detail-box-tab">
+          <li :class="detailActive === 0 ? 'active':''" @click="detailTabHandle(0)">宝贝详情</li>
+          <li :class="detailActive === 1 ? 'active':''" @click="detailTabHandle(1)">全部评价</li>
+        </ul>
+        <ItemDetail v-if="detailActive === 0"></ItemDetail>
+        <ItemComment v-else></ItemComment>
+      </div>
     </div>
     <GlobalFooter></GlobalFooter>
     <GlobalSidebar></GlobalSidebar>
@@ -21,19 +29,25 @@ import GlobalSidebar from '@/components/GlobalSidebar.vue'
 import GlobalZoomImg from '@/components/GlobalZoomImg'
 import GlobalBreadcrumb from '@/components/GlobalBreadcrumb'
 import ItemAddCart from './components/ItemAddCart'
+import ItemDetail from './components/ItemDetail'
+import ItemComment from './components/ItemComment'
 
 export default {
   name: 'Item',
-  components: { GlobalHeader, GlobalMenu, GlobalFooter, GlobalSidebar, GlobalZoomImg, GlobalBreadcrumb, ItemAddCart },
+  components: { GlobalHeader, GlobalMenu, GlobalFooter, GlobalSidebar, GlobalZoomImg, GlobalBreadcrumb, ItemAddCart, ItemDetail, ItemComment },
   data() {
     return {
       itemInfo: {},
+      detailActive: 0,
     }
   },
   created() {
     this.getData()
   },
   methods: {
+    detailTabHandle(index) {
+      this.detailActive = index
+    },
     /**
      * 获取数据
      */
@@ -65,6 +79,27 @@ export default {
   .item-content{
     width 1200px
     margin 0 auto
+  }
+  .item-detail-box{
+    margin-top 40px
+  }
+  .item-detail-box-tab{
+    background: #F5F5F5;
+    line-height 36px
+    overflow hidden
+
+    li{
+      border-top 2px solid #F5F5F5
+      float left
+      width 216px
+      text-align center
+      font-size 18px
+      font-weight 800px
+      cursor default
+    }
+    .active{
+      border-top-color #F03726
+    }
   }
 }
 </style>

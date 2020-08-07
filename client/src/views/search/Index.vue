@@ -62,7 +62,7 @@ export default {
      * 分页实现方法 跳转到page页
      */
     doPaging(page) {
-      this.page = page;
+      this.page = page
       // this.searchInBackend(this.keywords, this.sort, page, this.pageSize);
     },
     /**
