@@ -15,6 +15,15 @@ class Apis extends Ajax {
   articleSearchList(params) {
     return super.get('/api/article/search', params)
   }
+
+  /**
+   * 商品详情
+   * @param {Object} params - 请求参数
+   * @returns {Promise} 请求结果
+   */
+  itemsInfo(params) {
+    return super.get(`/api/items/info/${params.itemId}`, {})
+  }
 }
 
 const apis = new Apis(axios)
