@@ -68,7 +68,7 @@ export default {
     z-index: 1;
     height: 400px;
     width: 400px;
-
+    overflow hidden
     img{
       height: 400px;
       width: 400px;

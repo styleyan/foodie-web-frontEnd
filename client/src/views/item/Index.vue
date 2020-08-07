@@ -3,7 +3,11 @@
     <GlobalHeader></GlobalHeader>
     <GlobalMenu :isHideClassify="true" redText="商品详情"></GlobalMenu>
     <div class="item-content">
-      <GlobalZoomImg :itemImgList="itemInfo.itemImgList"></GlobalZoomImg>
+      <GlobalBreadcrumb :list="[{ href: '#', text: '首页' }, { href: '#', text: '分类' }, { href: '', text: '商品' }]"></GlobalBreadcrumb>
+      <div style="overflow: auto">
+        <GlobalZoomImg style="float:left;margin-right:30px" :itemImgList="itemInfo.itemImgList"></GlobalZoomImg>
+        <ItemAddCart></ItemAddCart>
+      </div>
     </div>
     <GlobalFooter></GlobalFooter>
     <GlobalSidebar></GlobalSidebar>
@@ -15,10 +19,12 @@ import GlobalMenu from '@/components/GlobalMenu.vue'
 import GlobalFooter from '@/components/GlobalFooter.vue'
 import GlobalSidebar from '@/components/GlobalSidebar.vue'
 import GlobalZoomImg from '@/components/GlobalZoomImg'
+import GlobalBreadcrumb from '@/components/GlobalBreadcrumb'
+import ItemAddCart from './components/ItemAddCart'
 
 export default {
   name: 'Item',
-  components: { GlobalHeader, GlobalMenu, GlobalFooter, GlobalSidebar, GlobalZoomImg },
+  components: { GlobalHeader, GlobalMenu, GlobalFooter, GlobalSidebar, GlobalZoomImg, GlobalBreadcrumb, ItemAddCart },
   data() {
     return {
       itemInfo: {},
