@@ -17,7 +17,7 @@
     </div>
     <!--悬浮搜索框-->
     <div class="header-search">
-      <img class="logo" :src="logoBig" />
+      <a href="/"><img class="logo" :src="logoBig" /></a>
       <div class="wrap-search">
         <input v-model="keywords" class="search-input" type="text" placeholder="请输入商品名" autocomplete="off">
         <button @click="doSearch" class="search-buttom" value="搜索">搜索</button>
