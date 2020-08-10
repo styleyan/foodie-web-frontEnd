@@ -19,6 +19,11 @@ const routes = [
     name: 'shopcart',
     component: resolve => require(['../../views/shopcart/Index.vue'], resolve),
   },
+  {
+    path: '/pay',
+    name: 'pay',
+    component: resolve => require(['../../views/pay/Index.vue'], resolve),
+  },
 ]
 
 export default routes
