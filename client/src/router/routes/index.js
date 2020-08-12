@@ -29,6 +29,11 @@ const routes = [
     name: 'alipay',
     component: resolve => require(['../../views/pay/Alipay.vue'], resolve),
   },
+  {
+    path: '/pay/wxpay',
+    name: 'wxpay',
+    component: resolve => require(['../../views/pay/Wxpay.vue'], resolve),
+  },
 ]
 
 export default routes

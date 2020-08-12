@@ -8,8 +8,8 @@
   </div>
 </template>
 <script>
-import AlipayImg from './alipay.png'
-import WxpayImg from './wxpay.png'
+import AlipayImg from '@/assets/images/alipay.png'
+import WxpayImg from '@/assets/images/wxpay.png'
 
 export default {
   name: 'PayMethod',

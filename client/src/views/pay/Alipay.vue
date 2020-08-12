@@ -7,15 +7,17 @@
         订单[<span>2008126SRN963X1P</span>]正在支付中，请耐心等待...
       </p>
     </div>
+    <PayFooter/>
   </div>
 </template>
 <script>
 import PayHeader from './components/PayHeader'
+import PayFooter from './components/PayFooter'
 import LoadingImg from '@/assets/images/loading.gif'
 
 export default {
   name: 'Alipay',
-  components: { PayHeader },
+  components: { PayHeader, PayFooter },
   data() {
     return {
       LoadingImg,
