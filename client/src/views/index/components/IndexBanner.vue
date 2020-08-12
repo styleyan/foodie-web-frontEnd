@@ -13,5 +13,6 @@ export default {
   width 100%
   height 432px
   background rgb(244 70 97)
+  text-align center
 }
 </style>

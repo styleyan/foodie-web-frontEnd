@@ -37,6 +37,13 @@ export default {
       WxPayQrCode,
     }
   },
+  mounted() {
+    setTimeout(() => {
+      this.$router.push({
+        name: 'paySuccess',
+      })
+    }, 5000)
+  },
 }
 </script>
 <style lang="stylus">

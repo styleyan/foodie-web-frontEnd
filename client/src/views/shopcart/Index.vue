@@ -60,7 +60,7 @@ export default {
   methods: {
     toPayHandle() {
       this.$router.push({
-        name: 'pay',
+        name: 'order',
       })
     },
   },
@@ -182,6 +182,7 @@ export default {
       background #f03726
       color #fff
       font-weight 700
+      text-align center
 
       &:hover{
         background #F40

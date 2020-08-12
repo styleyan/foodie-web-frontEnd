@@ -39,12 +39,13 @@ export default {
   min-height: 100%;
   z-index: 100;
   color: #FFF;
+  text-align center
 
   .user-info,.user-shop-car{
     cursor pointer
     display block
     padding 6px 0
-    text-align center
+
     .iconfont{
       font-size 26px
     }

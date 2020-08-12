@@ -26,7 +26,7 @@
           </dl>
         </div>
 
-        <a class="btn-go" href="#">提交订单</a>
+        <a class="btn-go" href="javascript:void(0)" @click="goPayHandle">提交订单</a>
       </div>
     </div>
     <AddressEdit v-model="addressEditStatus"></AddressEdit>
@@ -54,6 +54,11 @@ export default {
   methods: {
     showAddressEdit() {
       this.addressEditStatus = true
+    },
+    goPayHandle() {
+      this.$router.push(
+        { name: 'wxpay' },
+      )
     },
   },
 }
