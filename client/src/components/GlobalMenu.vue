@@ -42,13 +42,17 @@ export default {
       type: String,
       default: '全部分类',
     },
+    // 菜单
+    menus: {
+      type: Array,
+      default: () => ([
+        { text: '首页', href: '/' },
+        { text: '秒杀', href: '/ms' },
+      ]),
+    },
   },
   data() {
     return {
-      menus: [
-        { text: '首页', href: '/' },
-        { text: '秒杀', href: '/ms' },
-      ],
       navList: [
         { logo: 'cake', name: '甜点/蛋糕' },
         { logo: 'cookies', name: '饼干/膨化' },

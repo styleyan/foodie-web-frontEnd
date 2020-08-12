@@ -39,6 +39,18 @@ const routes = [
     name: 'paySuccess',
     component: resolve => require(['../../views/pay/Success.vue'], resolve),
   },
+  {
+    path: '/user',
+    name: 'user',
+    component: resolve => require(['../../views/user/Layout.vue'], resolve),
+    children: [
+      {
+        path: '/',
+        name: 'userIndex',
+        component: resolve => require(['../../views/user/index/Index.vue'], resolve),
+      },
+    ],
+  },
 ]
 
 export default routes
