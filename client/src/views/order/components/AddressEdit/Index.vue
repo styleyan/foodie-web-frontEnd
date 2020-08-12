@@ -1,5 +1,5 @@
 <template>
-  <div v-show="dialogStatus" class="add-edit">
+  <div v-show="visible" class="add-edit">
     <div class="add-edit-mask"></div>
     <div class="add-edit-dialog">
       <h3>新增地址</h3>
@@ -38,12 +38,27 @@
 <script>
 export default {
   name: 'AddEdit',
+  props: {
+    value: {
+      type: Boolean,
+      default: false,
+    },
+  },
   data() {
     const cities = window.arrAll
     return {
+      visible: this.value,
       dialogStatus: true,
       cities,
     }
+  },
+  watch: {
+    visible(val) {
+      this.$emit('input', val)
+    },
+    value(val) {
+      this.visible = val
+    },
   },
   created() {
     console.log(this.cities)
@@ -53,7 +68,7 @@ export default {
      * 取消弹框
      */
     cancelHandle() {
-      this.dialogStatus = false
+      this.visible = false
     },
   },
 }

@@ -37,7 +37,7 @@
         </div>
         <div class="bar-right">
           已选商品&nbsp;0&nbsp;件&nbsp;&nbsp;合计:&nbsp;<strong class="price">¥<em>0</em>元</strong>
-          <a href="#" class="btn-area">结算</a>
+          <a @click="toPayHandle" href="javascript:void(0)" class="btn-area">结算</a>
         </div>
       </div>
     </div>
@@ -58,6 +58,11 @@ export default {
   created() {
   },
   methods: {
+    toPayHandle() {
+      this.$router.push({
+        name: 'pay',
+      })
+    },
   },
 }
 </script>

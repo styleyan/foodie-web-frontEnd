@@ -3,7 +3,7 @@
     <div class="user-info">
       <i class="iconfont icon-user-center"></i>
     </div>
-    <div class="user-shop-car">
+    <div @click="toShopCardHandle" class="user-shop-car">
       <i class="iconfont icon-shop-car"></i>
       <span class="text">购<br/>物<br/>车</span>
       <span class="num">1</span>
@@ -18,6 +18,13 @@ export default {
     return {
 
     }
+  },
+  methods: {
+    toShopCardHandle() {
+      this.$router.push({
+        name: 'shopcart',
+      })
+    },
   },
 }
 </script>

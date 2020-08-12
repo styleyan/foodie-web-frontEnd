@@ -4,7 +4,7 @@
     <div class="pay-content">
       <div class="address-content-hd">
         <h3>确认收货地址</h3>
-        <div href="#" class="btn-danger">使用新地址</div>
+        <div @click="showAddressEdit" class="btn-danger">使用新地址</div>
       </div>
       <AddressInfo></AddressInfo>
       <PayMethod></PayMethod>
@@ -29,7 +29,7 @@
         <a class="btn-go" href="#">提交订单</a>
       </div>
     </div>
-    <AddressEdit></AddressEdit>
+    <AddressEdit v-model="addressEditStatus"></AddressEdit>
     <GlobalFooter class="shop-cart-footer"></GlobalFooter>
   </div>
 </template>
@@ -46,11 +46,15 @@ export default {
   components: { GlobalHeader, GlobalFooter, AddressInfo, PayMethod, PayOrderInfo, AddressEdit },
   data() {
     return {
+      addressEditStatus: false,
     }
   },
   created() {
   },
   methods: {
+    showAddressEdit() {
+      this.addressEditStatus = true
+    },
   },
 }
 </script>

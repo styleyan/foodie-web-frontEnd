@@ -20,9 +20,14 @@ const routes = [
     component: resolve => require(['../../views/shopcart/Index.vue'], resolve),
   },
   {
-    path: '/pay',
-    name: 'pay',
-    component: resolve => require(['../../views/pay/Index.vue'], resolve),
+    path: '/order',
+    name: 'order',
+    component: resolve => require(['../../views/order/Index.vue'], resolve),
+  },
+  {
+    path: '/pay/alipay',
+    name: 'alipay',
+    component: resolve => require(['../../views/pay/Alipay.vue'], resolve),
   },
 ]
 
