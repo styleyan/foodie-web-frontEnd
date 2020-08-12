@@ -44,6 +44,7 @@ export default {
     cursor pointer
     display block
     padding 6px 0
+    text-align center
     .iconfont{
       font-size 26px
     }

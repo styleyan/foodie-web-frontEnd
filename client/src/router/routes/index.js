@@ -34,6 +34,11 @@ const routes = [
     name: 'wxpay',
     component: resolve => require(['../../views/pay/Wxpay.vue'], resolve),
   },
+  {
+    path: '/pay/success',
+    name: 'paySuccess',
+    component: resolve => require(['../../views/pay/Success.vue'], resolve),
+  },
 ]
 
 export default routes
