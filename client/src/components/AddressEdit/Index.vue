@@ -144,6 +144,7 @@ export default {
   }
   .btn-wrap{
     margin-top 26px
+    text-align center
   }
   .btn-save,.btn-cancel{
     display inline-block

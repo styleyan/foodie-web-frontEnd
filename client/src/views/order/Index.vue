@@ -36,10 +36,10 @@
 <script>
 import GlobalHeader from '@/components/GlobalHeader.vue'
 import GlobalFooter from '@/components/GlobalFooter.vue'
-import AddressInfo from './components/AddressInfo/Index'
 import PayMethod from './components/PayMethod/Index'
 import PayOrderInfo from './components/PayOrderInfo'
-import AddressEdit from './components/AddressEdit/Index'
+import AddressEdit from '@/components/AddressEdit/Index'
+import AddressInfo from '@/components/AddressInfo/Index'
 
 export default {
   name: 'Pay',

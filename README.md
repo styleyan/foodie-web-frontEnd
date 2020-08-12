@@ -30,3 +30,7 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 ### 参考网站
 [天天吃货](http://shop.z.mukewang.com/)
+
+### 未完成的功能
+- 首页轮播图效果
+- 个人中心 -> 个人资料 -> 生日选项

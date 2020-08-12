@@ -54,6 +54,11 @@ const routes = [
         name: 'userInfoEdit',
         component: resolve => require(['../../views/user/info/Index.vue'], resolve),
       },
+      {
+        path: 'address',
+        name: 'userInfoAddress',
+        component: resolve => require(['../../views/user/address/Index.vue'], resolve),
+      },
     ],
   },
 ]
