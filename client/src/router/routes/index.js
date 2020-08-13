@@ -64,6 +64,16 @@ const routes = [
         name: 'userInfoOrder',
         component: resolve => require(['../../views/user/order/Index.vue'], resolve),
       },
+      {
+        path: 'doComment',
+        name: 'userInfoDoComment',
+        component: resolve => require(['../../views/user/doComment/Index.vue'], resolve),
+      },
+      {
+        path: 'comment',
+        name: 'userInfoComment',
+        component: resolve => require(['../../views/user/comment/Index.vue'], resolve),
+      },
     ],
   },
 ]
