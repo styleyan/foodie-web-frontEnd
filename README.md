@@ -33,4 +33,5 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 ### 未完成的功能
 - 首页轮播图效果
+- 首页菜单分类功能
 - 个人中心 -> 个人资料 -> 生日选项
