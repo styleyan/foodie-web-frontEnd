@@ -23,7 +23,7 @@
           <label><input type="radio" name="sex"/><span class="radio-span">保密</span></label>
         </li>
         <li>
-          <span class="label">生日</span><input type="text"/>
+          <span class="label">生日</span><GlobalDatepicker v-on:picked="picked"></GlobalDatepicker>
         </li>
         <li>
           <span class="label">手机</span><input type="text"/>
@@ -40,21 +40,26 @@
 </template>
 <script>
 import UserTopBar from '../components/UserTopBar'
+import GlobalDatepicker from '@/components/GlobalDatepicker'
 
 export default {
   name: 'UserInfoEdit',
-  components: { UserTopBar },
+  components: { UserTopBar, GlobalDatepicker },
   data() {
     return {
 
     }
+  },
+  methods: {
+    picked(year, month, date) {
+      console.warn(`你选择了${year}年${month}月${date}日`)
+    },
   },
 }
 </script>
 <style lang="stylus">
 .user-info-edit{
   background #fff
-
   .user-info-pic{
     margin 50px
     padding-bottom 16px

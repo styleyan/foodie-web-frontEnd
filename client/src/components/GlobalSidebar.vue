@@ -8,6 +8,13 @@
       <span class="text">购<br/>物<br/>车</span>
       <span class="num">1</span>
     </div>
+    <dl class="sidebar-user-info">
+      <dt><img width="80" height="80" src="http://122.152.205.72:88/group1/M00/00/05/CpoxxFw_8_qAIlFXAAAcIhVPdSg994.png"/></dt>
+      <dd>
+        <p class="user-name">用户昵称: xiaofei.su</p>
+        <p><a href="javascript:void(0)">退出登录</a></p>
+      </dd>
+    </dl>
     <div class="top-header"><i class="iconfont icon-to-top"></i></div>
   </div>
 </template>
@@ -52,6 +59,41 @@ export default {
 
     &:hover{
       background #ED145B
+    }
+  }
+
+  .user-info{
+    position relative
+  }
+
+  .sidebar-user-info{
+    position absolute
+    left -268px
+    top 80px
+    width 260px
+    height 150px
+    background #fff
+    box-shadow: 0 0 5px #00000066;
+
+    dt,dd{
+      float left
+    }
+    dt{
+      margin 34px 10px 0 10px
+    }
+    dd{
+      margin-top 50px
+      line-height 22px
+      font-size 14px
+      color #333
+    }
+    .user-name{
+      text-align left
+      margin-bottom 6px
+    }
+
+    a{
+      color #999
     }
   }
 
