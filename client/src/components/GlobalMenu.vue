@@ -53,47 +53,52 @@ export default {
   },
   data() {
     return {
-      navList: [
-        { logo: 'cake', name: '甜点/蛋糕' },
-        { logo: 'cookies', name: '饼干/膨化' },
-        { logo: 'meat', name: '熟食/肉类' },
-        { logo: 'cake', name: '甜点/蛋糕' },
-        { logo: 'cake', name: '甜点/蛋糕' },
-        { logo: 'cake', name: '甜点/蛋糕' },
-        { logo: 'cake', name: '甜点/蛋糕' },
-        { logo: 'cake', name: '甜点/蛋糕' },
-        { logo: 'cake', name: '甜点/蛋糕' },
-        { logo: 'cake', name: '甜点/蛋糕' },
-      ],
+      navList: [],
       navShowStatus: false,
       navActive: '',
+      tmpActive: '',
     }
   },
+  created() {
+    this.getClassifyNav()
+  },
   methods: {
-    /**
-     * 鼠标移入菜单栏
-     */
-    enterHandle() {
-      this.navShowStatus = true
-    },
-    /**
-     * 鼠标移出菜单栏
-     */
-    leaveHandle() {
-      this.navShowStatus = false
+    getClassifyNav() {
+      this.$axios.indexCats().then((list) => {
+        list.forEach(item => {
+          item.logo = item.logo.match(/\/(.*?)\./)[1]
+        })
+        this.navList = list
+      }).catch((err) => {
+        console.log(err)
+      })
     },
     /**
      * 分类移入事件
      */
     enterNavHandle(item) {
       this.navActive = item.logo
-      console.log(item)
+      this.tmpActive = item.logo
     },
     /**
      * 分类移出事件
      */
     leaveNavHandle() {
       this.navActive = ''
+    },
+    /**
+     * 鼠标移入菜单栏
+     */
+    enterHandle() {
+      this.navActive = this.tmpActive
+      this.navShowStatus = true
+    },
+    /**
+     * 鼠标移出菜单栏
+     */
+    leaveHandle() {
+      this.navActive = ''
+      this.navShowStatus = false
     },
   },
 }

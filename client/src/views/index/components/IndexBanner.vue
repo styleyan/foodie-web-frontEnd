@@ -1,11 +1,10 @@
 <template>
   <div class="index-banner" id="demo-slider-0">
-    <ul class="slides">
-      <li style="background:rgb(244 70 97);">
-        <a href="#" target="_blank"><img src="http://122.152.205.72:88/group1/M00/00/05/CpoxxF0ZmG-ALsPRAAEX2Gk9FUg848.png"></a>
-      </li>
-      <li style="background:#fd9808;">
-        <a href="#" target="_blank"><img src="http://122.152.205.72:88/group1/M00/00/05/CpoxxF0ZmHuAPlXvAAFe-H5_-Nw961.png"></a>
+    <ul v-show="showStatus" class="slides">
+      <li v-for="(item, key) in banners" :key="key" :style="`background:${item.backgroundColor};`">
+        <a :href="`/item?itemId=${item.id}`" target="_blank">
+          <img :src="item.imageUrl">
+        </a>
       </li>
     </ul>
   </div>
@@ -13,15 +12,43 @@
 <script>
 export default {
   name: 'IndexBanner',
+  data() {
+    return {
+      banners: [],
+      showStatus: false,
+    }
+  },
   mounted() {
-    // 循环渲染轮播图
-    window.$('#demo-slider-0').flexslider({
-      animation: 'slide',
-      slideshowSpeed: 4000,
-      animationSpeed: 1000,
-      slideshow: true,
-      directionNav: true,
-    })
+    this.getBanner()
+  },
+  methods: {
+    /**
+     * 获取banner列表
+     */
+    getBanner() {
+      this.$axios.indexCarousel().then((data) => {
+        this.banners = data
+        setTimeout(() => {
+          this.showStatus = true
+          this.startSliderHandle()
+        }, 5)
+      }).catch((err) => {
+        console.log(err)
+      })
+    },
+    /**
+     * 开始轮播
+     */
+    startSliderHandle() {
+      // 循环渲染轮播图
+      window.$('#demo-slider-0').flexslider({
+        animation: 'slide',
+        slideshowSpeed: 4000,
+        animationSpeed: 1000,
+        slideshow: true,
+        directionNav: true,
+      })
+    },
   },
 }
 </script>

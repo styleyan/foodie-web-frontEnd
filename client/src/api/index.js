@@ -7,13 +7,20 @@ import './axios.config'
  */
 class Apis extends Ajax {
   /**
-   * 文章列表
-   * @url http://rapapi.org/workspace/myWorkspace.do?projectId=29324#294680
+   * 获取首页banner
    * @param {Object} params - 请求参数
    * @returns {Promise} 请求结果
    */
-  articleSearchList(params) {
-    return super.get('/api/article/search', params)
+  indexCarousel(params) {
+    return super.get('/api/index/carousel', params)
+  }
+
+  /**
+   * 获取全部分类
+   * @param {*} params
+   */
+  indexCats(params) {
+    return super.get('/api/index/cats', params)
   }
 
   /**
