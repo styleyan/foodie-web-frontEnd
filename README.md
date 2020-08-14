@@ -35,4 +35,4 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 - 首页轮播图效果(完成)
 - 首页菜单分类功能(完成)
 - 个人中心 -> 个人资料 -> 生日选项 (完成)
-- 侧边栏个人信息展示
+- 侧边栏个人信息展示(完成)

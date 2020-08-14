@@ -1,6 +1,11 @@
 <template>
   <div class="global-sidebar">
-    <div class="user-info">
+    <div
+     @mouseenter="enterInfoHandle"
+     @mouseleave="leaveInfoHandle"
+     class="user-info"
+     :class="timer ? 'hover' : ''"
+     >
       <i class="iconfont icon-user-center"></i>
     </div>
     <div @click="toShopCardHandle" class="user-shop-car">
@@ -8,7 +13,10 @@
       <span class="text">购<br/>物<br/>车</span>
       <span class="num">1</span>
     </div>
-    <dl class="sidebar-user-info">
+    <dl
+      @mouseenter="enterInfoHandle"
+      @mouseleave="leaveInfoHandle"
+      v-if="infoStatus" class="sidebar-user-info">
       <dt><img width="80" height="80" src="http://122.152.205.72:88/group1/M00/00/05/CpoxxFw_8_qAIlFXAAAcIhVPdSg994.png"/></dt>
       <dd>
         <p class="user-name">用户昵称: xiaofei.su</p>
@@ -23,7 +31,8 @@ export default {
   name: 'GlobalSidebar',
   data() {
     return {
-
+      infoStatus: false,
+      timer: null,
     }
   },
   methods: {
@@ -31,6 +40,17 @@ export default {
       this.$router.push({
         name: 'shopcart',
       })
+    },
+    enterInfoHandle() {
+      clearTimeout(this.timer)
+      this.infoStatus = true
+    },
+    leaveInfoHandle() {
+      clearTimeout(this.timer)
+      this.timer = setTimeout(() => {
+        this.infoStatus = false
+        this.timer = null
+      }, 100)
     },
   },
 }
@@ -61,6 +81,9 @@ export default {
       background #ED145B
     }
   }
+  .hover{
+    background #ED145B
+  }
 
   .user-info{
     position relative
@@ -68,7 +91,7 @@ export default {
 
   .sidebar-user-info{
     position absolute
-    left -268px
+    left -262px
     top 80px
     width 260px
     height 150px
