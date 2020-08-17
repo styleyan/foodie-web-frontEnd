@@ -61,6 +61,20 @@ class Apis extends Ajax {
   itemsComments(params) {
     return super.get('/api/items/comments', params)
   }
+
+  /**
+   * 注册账号
+   */
+  userRegister(params) {
+    return super.post('/api/register', params)
+  }
+
+  /**
+   * 登录账号
+   */
+  userLogin(params) {
+    return super.post('/api/login', params)
+  }
 }
 
 const apis = new Apis(axios)

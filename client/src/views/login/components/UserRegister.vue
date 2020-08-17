@@ -2,12 +2,12 @@
   <div class="user-login">
     <h3>用户注册</h3>
     <ul class="input-warp">
-      <li><i class="iconfont icon-user-center"></i><input type="text" placeholder="用户名"/></li>
-      <li><i class="iconfont icon-lock"></i><input type="password" placeholder="输入登录密码"/></li>
-      <li><i class="iconfont icon-lock"></i><input type="password" placeholder="再次输入密码"/></li>
+      <li><i class="iconfont icon-user-center"></i><input type="text" v-model="userRegister.username" placeholder="用户名"/></li>
+      <li><i class="iconfont icon-lock"></i><input type="password" v-model="userRegister.password" placeholder="输入登录密码"/></li>
+      <li><i class="iconfont icon-lock"></i><input type="password" v-model="userRegister.confirmPassword" placeholder="再次输入密码"/></li>
     </ul>
-    <p class="rg"><a href="javascript:void(0)">已有账号？去登录</a></p>
-    <p><button class="login-btn">注册</button></p>
+    <p class="rg"><a href="javascript:void(0)" @click="switchHandle">已有账号？去登录</a></p>
+    <p><button class="login-btn" @click="registerHandle">注册</button></p>
   </div>
 </template>
 <script>
@@ -15,8 +15,30 @@ export default {
   name: 'UserLogin',
   data() {
     return {
-
+      userRegister: {
+        username: '',
+        password: '',
+        confirmPassword: '',
+      },
     }
+  },
+  methods: {
+    /**
+     * 注册
+     */
+    registerHandle() {
+      this.$axios.userRegister({ ...this.userRegister }).then((data) => {
+        this.switchHandle()
+      }).catch((error) => {
+        console.log(error)
+      })
+    },
+    /**
+     * 切换
+     */
+    switchHandle() {
+      this.$emit('switch', 1)
+    },
   },
 }
 </script>

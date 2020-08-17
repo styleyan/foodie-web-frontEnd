@@ -6,8 +6,8 @@
     <div class="login-banner">
       <div class="content">
         <img :src="LoginPageImg"/>
-        <UserLogin v-show="false"/>
-        <UserRegister/>
+        <UserLogin @switch="switchHandle" v-if="type"/>
+        <UserRegister @switch="switchHandle" v-else/>
       </div>
     </div>
     <GlobalFooter></GlobalFooter>
@@ -27,12 +27,15 @@ export default {
     return {
       LogoBigImg,
       LoginPageImg,
+      type: 1,
     }
   },
   mounted() {
   },
   methods: {
-
+    switchHandle(val) {
+      this.type = val
+    },
   },
 }
 </script>

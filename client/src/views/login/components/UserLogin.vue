@@ -2,11 +2,11 @@
   <div class="user-login">
     <h3>登录商城</h3>
     <ul class="input-warp">
-      <li><i class="iconfont icon-user-center"></i><input type="text"/></li>
-      <li><i class="iconfont icon-lock"></i><input type="password"/></li>
+      <li><i class="iconfont icon-user-center"></i><input v-model="loginData.username" type="text"/></li>
+      <li><i class="iconfont icon-lock"></i><input v-model="loginData.password" type="password"/></li>
     </ul>
-    <p class="rg"><a href="javascript:void(0)">前往注册</a></p>
-    <p><button class="login-btn">登录</button></p>
+    <p class="rg"><a href="javascript:void(0)" @click="switchHandle">前往注册</a></p>
+    <p><button class="login-btn" @click="loginHandle">登录</button></p>
   </div>
 </template>
 <script>
@@ -14,8 +14,26 @@ export default {
   name: 'UserLogin',
   data() {
     return {
-
+      loginData: {
+        username: '',
+        password: '',
+      },
     }
+  },
+  methods: {
+    loginHandle() {
+      this.$axios.userLogin({ ...this.loginData }).then((data) => {
+        console.log(data)
+      }).catch((error) => {
+        console.log(error)
+      })
+    },
+    /**
+     * 切换
+     */
+    switchHandle() {
+      this.$emit('switch', 0)
+    },
   },
 }
 </script>
