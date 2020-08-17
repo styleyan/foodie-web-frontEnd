@@ -1,10 +1,10 @@
 <template>
   <div class="add">
     <GlobalHeader></GlobalHeader>
-    <GlobalMenu></GlobalMenu>
+    <GlobalMenu @navsData="navsDataHandle"></GlobalMenu>
     <IndexBanner></IndexBanner>
     <Recommendation></Recommendation>
-    <ClassifyShop v-for="(item, key) in [1,2,3,4,5,6,7,8,9,10]" :key="key"></ClassifyShop>
+    <ClassifyShop v-for="(item, key) in navsList" :item="item" :key="key"></ClassifyShop>
     <GlobalFooter></GlobalFooter>
     <GlobalSidebar></GlobalSidebar>
   </div>
@@ -23,9 +23,17 @@ export default {
   name: 'Index',
   components: { GlobalHeader, GlobalMenu, IndexBanner, Recommendation, ClassifyShop, GlobalFooter, GlobalSidebar },
   data() {
-    return {}
+    return {
+      navsList: [],
+    }
   },
   methods: {
+    /**
+     * 分类数据
+     */
+    navsDataHandle(list) {
+      this.navsList = list
+    },
   },
 }
 </script>

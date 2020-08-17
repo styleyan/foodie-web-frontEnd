@@ -24,6 +24,22 @@ class Apis extends Ajax {
   }
 
   /**
+   * 查看分类详情
+   * @param {*} params
+   */
+  indexCatsSubCat(params) {
+    return super.get(`/api/index/subCat/${params.rootCatId}`)
+  }
+
+  /**
+   * 查询每个一级分类下的最新6条商品数据
+   * @return
+   */
+  indexSixNewItems(params) {
+    return super.get(`/api/index/sixNewItems/${params.rootCatId}`)
+  }
+
+  /**
    * 商品详情
    * @param {Object} params - 请求参数
    * @returns {Promise} 请求结果

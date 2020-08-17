@@ -3,17 +3,17 @@
     <GlobalHeader></GlobalHeader>
     <GlobalMenu :isHideClassify="true" redText="商品详情"></GlobalMenu>
     <div class="item-content">
-      <GlobalBreadcrumb :list="[{ href: '#', text: '首页' }, { href: '#', text: '分类' }, { href: '', text: '商品' }]"></GlobalBreadcrumb>
+      <GlobalBreadcrumb :list="[{ href: '/', text: '首页' }, { href: '#', text: '分类' }, { href: '', text: '商品' }]"></GlobalBreadcrumb>
       <div style="overflow: auto">
         <GlobalZoomImg style="float:left;margin-right:30px" :itemImgList="itemInfo.itemImgList"></GlobalZoomImg>
-        <ItemAddCart></ItemAddCart>
+        <ItemAddCart :item="itemInfo.item" :itemSpecList="itemInfo.itemSpecList"></ItemAddCart>
       </div>
       <div class="item-detail-box">
         <ul class="item-detail-box-tab">
           <li :class="detailActive === 0 ? 'active':''" @click="detailTabHandle(0)">宝贝详情</li>
           <li :class="detailActive === 1 ? 'active':''" @click="detailTabHandle(1)">全部评价</li>
         </ul>
-        <ItemDetail v-if="detailActive === 0"></ItemDetail>
+        <ItemDetail :itemParam="itemInfo.itemParam" :item="itemInfo.item" v-if="detailActive === 0"></ItemDetail>
         <ItemComment v-else></ItemComment>
       </div>
     </div>
@@ -52,7 +52,8 @@ export default {
      * 获取数据
      */
     getData() {
-      this.$axios.itemsInfo({ itemId: 'cake-1001' }).then((data) => {
+      const params = this.$route.params
+      this.$axios.itemsInfo({ itemId: params.itemId }).then((data) => {
         const itemImgList = data.itemImgList
         // 循环图片，把头图放在第一张
         for (let i = 0; i < itemImgList.length; i++) {

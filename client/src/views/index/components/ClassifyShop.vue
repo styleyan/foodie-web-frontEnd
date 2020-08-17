@@ -1,53 +1,53 @@
 <template>
   <div class="classify-shop">
-    <div class="shop-title"><h4>甜点/蛋糕</h4> <h3>每一道甜品都能打开你的味蕾</h3></div>
-    <ul class="shop-container">
-      <li class="first" style="background:#fe7a65">
+    <div class="shop-title"><h4>{{item.name}}</h4><h3>{{item.slogan}}</h3></div>
+    <ul v-if="classifyShop.simpleItemList.length" class="shop-container">
+      <li class="first" :style="`background:${classifyShop.bgColor}`">
         <a class="first-images" href="#">
-          <img src="http://122.152.205.72:88/foodie/category/cake.png"/>
+          <img :src="classifyShop.catImage"/>
         </a>
       </li>
-      <li class="two border-right">
+      <li class="border-right">
         <div class="border-bottom">
-          <a href="#">
-            <img src="http://122.152.205.72:88/foodie/cake-1002/img1.png" width="170" height="170"/>
+          <a :href="`item/${classifyShop.simpleItemList[0].itemId}`">
+            <img :src="classifyShop.simpleItemList[0].itemUrl" width="170" height="170"/>
           </a>
-          <h3 class="title">【天天吃货】网红烘焙蛋糕 好吃的蛋糕</h3>
+          <h3 class="title">{{classifyShop.simpleItemList[0].itemName}}</h3>
         </div>
         <div>
-          <a href="#">
-            <img src="http://122.152.205.72:88/foodie/cake-1005/img1.png" width="170" height="170"/>
+          <a :href="`item/${classifyShop.simpleItemList[1].itemId}`">
+            <img :src="classifyShop.simpleItemList[1].itemUrl" width="170" height="170"/>
           </a>
-          <h3 class="title">【天天吃货】网红烘焙蛋糕 好吃的蛋糕</h3>
+          <h3 class="title">{{classifyShop.simpleItemList[1].itemName}}</h3>
         </div>
       </li>
-      <li class="three border-right">
+      <li class="border-right">
         <div class="one-item">
-          <h3 class="title">【天天吃货】网红烘焙蛋糕 好吃的蛋糕</h3>
-          <a href="#">
-            <img src="http://122.152.205.72:88/foodie/cake-1004/img1.png" width="170" height="170"/>
+          <h3 class="title">{{classifyShop.simpleItemList[2].itemName}}</h3>
+          <a :href="`item/${classifyShop.simpleItemList[2].itemId}`">
+            <img :src="classifyShop.simpleItemList[2].itemUrl" width="170" height="170"/>
           </a>
         </div>
       </li>
-      <li class="four border-right">
+      <li class="border-right">
         <div class="border-bottom">
-          <a href="#">
-            <img src="http://122.152.205.72:88/foodie/cake-1001/img1.png" width="170" height="170"/>
+          <a :href="`item/${classifyShop.simpleItemList[3].itemId}`">
+            <img :src="classifyShop.simpleItemList[3].itemUrl" width="170" height="170"/>
           </a>
-          <h3 class="title">【天天吃货】网红烘焙蛋糕 好吃的蛋糕</h3>
+          <h3 class="title">{{classifyShop.simpleItemList[3].itemName}}</h3>
         </div>
         <div>
-          <a href="#">
-            <img src="http://122.152.205.72:88/foodie/cake-1006/img2.png" width="170" height="170"/>
+          <a :href="`item/${classifyShop.simpleItemList[4].itemId}`">
+            <img :src="classifyShop.simpleItemList[4].itemUrl" width="170" height="170"/>
           </a>
-          <h3 class="title">【天天吃货】网红烘焙蛋糕 好吃的蛋糕</h3>
+          <h3 class="title">{{classifyShop.simpleItemList[4].itemName}}</h3>
         </div>
       </li>
-      <li class="five">
+      <li>
         <div class="one-item">
-          <h3 class="title">【天天吃货】网红烘焙蛋糕 好吃的蛋糕</h3>
-          <a href="#">
-            <img src="http://122.152.205.72:88/foodie/cake-1003/img1.png" width="170" height="170"/>
+          <h3 class="title">{{classifyShop.simpleItemList[5].itemName}}</h3>
+          <a :href="`item/${classifyShop.simpleItemList[5].itemId}`">
+            <img :src="classifyShop.simpleItemList[5].itemUrl" width="170" height="170"/>
           </a>
         </div>
       </li>
@@ -57,10 +57,33 @@
 <script>
 export default {
   name: 'ClassifyShop',
+  props: {
+    item: {
+      type: Object,
+      default: () => ({}),
+    },
+  },
   data() {
     return {
-
+      classifyShop: {
+        simpleItemList: [],
+      },
     }
+  },
+  created() {
+    this.getSixData()
+  },
+  methods: {
+    /**
+     * 获取每中分类6个商品数据
+     */
+    getSixData() {
+      this.$axios.indexSixNewItems({ rootCatId: this.item.id }).then((data) => {
+        this.classifyShop = data[0] || null
+      }).catch((error) => {
+        console.log(error)
+      })
+    },
   },
 }
 </script>

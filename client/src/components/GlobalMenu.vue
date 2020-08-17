@@ -19,10 +19,11 @@
         </li>
       </ul>
       <div @mouseenter="enterHandle" @mouseleave="leaveHandle" v-show="navShowStatus" class="nav-container">
-        <dl class="dl-sort">
-          <dt>巧克力</dt>
-          <dd><a href="#" target="_blank">黑巧克力</a></dd>
-          <dd><a href="#" target="_blank">水电费水电费是</a></dd>
+        <dl v-for="(item, key) in subCatInfo" :key="key" class="dl-sort">
+          <dt>{{item.name}}</dt>
+          <dd v-for="(current, key2) in item.subCatList" :key="key2">
+            <a :href="`/aaa/${current.subId}`" target="_blank">{{current.subName}}</a>
+          </dd>
         </dl>
       </div>
     </div>
@@ -57,18 +58,37 @@ export default {
       navShowStatus: false,
       navActive: '',
       tmpActive: '',
+      cacheNav: {},
+      subCatInfo: [],
     }
   },
   created() {
-    this.getClassifyNav()
+    if (!this.isHideClassify) {
+      this.getClassifyNav()
+    }
   },
   methods: {
+    /**
+     * 获取所有类型
+     */
     getClassifyNav() {
       this.$axios.indexCats().then((list) => {
         list.forEach(item => {
           item.logo = item.logo.match(/\/(.*?)\./)[1]
         })
         this.navList = list
+        this.$emit('navsData', list)
+      }).catch((err) => {
+        console.log(err)
+      })
+    },
+    /**
+     * 获取分类详情
+     */
+    getSubCat(id) {
+      this.$axios.indexCatsSubCat({ rootCatId: id }).then((data) => {
+        this.cacheNav[ id ] = data
+        this.subCatInfo = data
       }).catch((err) => {
         console.log(err)
       })
@@ -79,6 +99,13 @@ export default {
     enterNavHandle(item) {
       this.navActive = item.logo
       this.tmpActive = item.logo
+
+      const cacheSubCat = this.cacheNav[item.id]
+      if (!cacheSubCat) {
+        this.getSubCat(item.id)
+      } else {
+        this.subCatInfo = cacheSubCat
+      }
     },
     /**
      * 分类移出事件
@@ -206,7 +233,7 @@ export default {
         }
         dd{
           float left
-          margin 2px 6px 4px 0
+          margin 2px 6px 14px 0
 
           a{
             line-height: 14px;

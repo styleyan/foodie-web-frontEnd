@@ -10,7 +10,7 @@ const routes = [
     component: resolve => require(['../../views/search/Index.vue'], resolve),
   },
   {
-    path: '/item',
+    path: '/item/:itemId',
     name: 'item',
     component: resolve => require(['../../views/item/Index.vue'], resolve),
   },

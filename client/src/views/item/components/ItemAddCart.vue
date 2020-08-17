@@ -1,25 +1,23 @@
 <template>
   <div class="item-add-cart">
-    <h1 class="hd">【天天吃货】可爱美丽甜甜圈 最美下午茶</h1>
+    <h1 class="hd">{{item.itemName}}</h1>
     <ul class="detail-list">
-      <li><span class="label">店铺优惠</span><span class="gold">9折优惠</span></li>
-      <li><span class="label">促销价</span><span class="gold"><em>¥</em><strong class="price">315</strong></span></li>
-      <li><span class="label">原价</span><span><del>¥350</del></span></li>
-      <li><span class="label">累计销售</span><span>878</span></li>
+      <li><span class="label">店铺优惠</span><span class="gold">{{activeSpec.discounts === 1 ? '无优惠' : `${activeSpec.discounts * 10}折优惠`}}</span></li>
+      <li><span class="label">促销价</span><span class="gold"><em>¥</em><strong class="price">{{activeSpec.priceDiscount / 100}}</strong></span></li>
+      <li><span class="label">原价</span><span><del>¥{{activeSpec.priceNormal / 100}}</del></span></li>
+      <li><span class="label">累计销售</span><span>{{item.sellCounts}}</span></li>
     </ul>
     <dl class="cly-wrap">
       <dt class="left-label">口味</dt>
-      <dd class="cly-list">
-        巧克力<i class="iconfont icon-right-check"></i>
-      </dd>
-      <dd class="cly-list cly-active">
-        巧克力<i class="iconfont icon-right-check"></i>
+      <!-- cly-active 选中样式 -->
+      <dd @click="activeHandle(cur)" class="cly-list" v-for="(cur, key) in itemSpecList" :class="activeSpec.id === cur.id ? 'cly-active':''" :key="key">
+        {{cur.name}}<i class="iconfont icon-right-check"></i>
       </dd>
     </dl>
     <dl class="mum-wrap">
       <dt class="left-label">数量</dt>
       <dd class="select-number"><span>-</span><input class="num" value="1" type="text"/><span>+</span></dd>
-      <dd>库存253件</dd>
+      <dd>库存{{activeSpec.stock}}件</dd>
     </dl>
     <a href="javascript:void(0);" class="add-btn">加入购物车</a>
   </div>
@@ -27,10 +25,34 @@
 <script>
 export default {
   name: 'ItemAddCart',
+  props: {
+    item: {
+      type: Object,
+      default: () => ({}),
+    },
+    // 口味分类
+    itemSpecList: {
+      type: Array,
+      default: () => ([]),
+    },
+  },
   data() {
     return {
-
+      activeSpec: {},
     }
+  },
+  watch: {
+    itemSpecList(val) {
+      this.activeSpec = val[0] || {}
+    },
+  },
+  methods: {
+    /**
+     * 类型选择
+     */
+    activeHandle(item) {
+      this.activeSpec = item
+    },
   },
 }
 </script>
