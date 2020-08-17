@@ -1,25 +1,34 @@
 <template>
   <div class="item-comment">
     <div class="comment-summary">
-      <div class="rate">好评度<span class="num"><strong>10</strong>%</span></div>
+      <div class="rate">好评度
+        <span class="num">
+          <template v-if="allCommentLevel.totalCounts === 0">
+            <strong>100</strong>%
+          </template>
+          <template v-if="allCommentLevel.totalCounts > 0">
+            <strong>{{Math.round(allCommentLevel.goodCounts / allCommentLevel.totalCounts * 100)}}</strong>%
+          </template>
+        </span>
+      </div>
       <ul class="cls">
-        <li>全部评价（1）</li>
-        <li>好评（1）</li>
-        <li>中评（1）</li>
-        <li>差评（1）</li>
+        <li @click="levelHandle('')">全部评价（{{allCommentLevel.totalCounts}}）</li>
+        <li @click="levelHandle('1')">好评（{{allCommentLevel.goodCounts}}）</li>
+        <li @click="levelHandle('2')">中评（{{allCommentLevel.normalCounts}}）</li>
+        <li @click="levelHandle('3')">差评（{{allCommentLevel.badCounts}}）</li>
       </ul>
     </div>
     <div class="comment-list">
       <ul>
-        <li v-for="(item,key) in [2,3,4,5,6]" :key="key">
-          <img src="http://api.z.mukewang.com:8088/foodie-dev-api/foodie/faces/1908017YR51G1XWH/face-1908017YR51G1XWH.jpg?t=20200804162134" class="avatar">
+        <li v-for="(item, key) in commentList" :key="key">
+          <img :src="item.userFace" class="avatar">
           <div class="comment-main">
             <header class="comment-main-hd">
-              <span class="user">d*****o (匿名)</span>评论于&nbsp;<time datetime="">2019年07月29日 3:20:34</time>
+              <span class="user">{{item.nickname}} (匿名)</span>评论于&nbsp;<time>{{item.createdTime}}</time>
             </header>
             <div class="comment-main-bd">
-              <p>的地位</p>
-              <p class="spec-name">规格：草莓味</p>
+              <p>{{item.content}}</p>
+              <p class="spec-name">规格：{{item.sepcName}}</p>
             </div>
           </div>
         </li>
@@ -36,6 +45,13 @@ import GlobalZpageNav from '@/components/GlobalZpageNav'
 export default {
   name: 'ItemComment',
   components: { GlobalZpageNav },
+  props: {
+    // 商品id
+    itemId: {
+      type: String,
+      default: '',
+    },
+  },
   data() {
     return {
       // 分页页数
@@ -45,12 +61,60 @@ export default {
       // 总页数
       maxPage: 10,
       // 总记录数
-      total: 100,
+      total: 0,
+      // 分类级别信息
+      allCommentLevel: {},
+      // 评论类型
+      levelType: '',
+      // 评论列表
+      commentList: [],
+    }
+  },
+  created() {
+    if (this.itemId) {
+      this.getCommentLevel()
+      this.getItemComment()
     }
   },
   methods: {
+    /**
+     * 查看类型下的评论
+     */
+    levelHandle(val) {
+      this.levelType = val
+      this.page = 1
+      this.getItemComment()
+    },
+    /**
+     * 获取商品评论类型数量
+     */
+    getCommentLevel() {
+      this.$axios.itemsCommentLevel({ itemId: this.itemId }).then((data) => {
+        this.allCommentLevel = data
+      }).catch((error) => {
+        console.log(error)
+      })
+    },
+    /**
+     * 获取最新评论
+     */
+    getItemComment() {
+      this.$axios.itemsComments({
+        itemId: this.itemId,
+        level: this.levelType,
+        page: this.page,
+        pageSize: this.pageSize,
+      }).then((data) => {
+        this.commentList = data.rows
+        this.total = data.total
+        this.page = data.page
+      }).catch((error) => {
+        console.log(error)
+      })
+    },
     doPaging(page) {
       this.page = page
+      this.getItemComment()
     },
   },
 }

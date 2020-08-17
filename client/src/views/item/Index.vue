@@ -14,7 +14,7 @@
           <li :class="detailActive === 1 ? 'active':''" @click="detailTabHandle(1)">全部评价</li>
         </ul>
         <ItemDetail :itemParam="itemInfo.itemParam" :item="itemInfo.item" v-if="detailActive === 0"></ItemDetail>
-        <ItemComment v-else></ItemComment>
+        <ItemComment :itemId="itemId" v-else></ItemComment>
       </div>
     </div>
     <GlobalFooter></GlobalFooter>
@@ -39,9 +39,11 @@ export default {
     return {
       itemInfo: {},
       detailActive: 0,
+      itemId: '',
     }
   },
   created() {
+    this.itemId = this.$route.params.itemId
     this.getData()
   },
   methods: {
@@ -52,8 +54,7 @@ export default {
      * 获取数据
      */
     getData() {
-      const params = this.$route.params
-      this.$axios.itemsInfo({ itemId: params.itemId }).then((data) => {
+      this.$axios.itemsInfo({ itemId: this.itemId }).then((data) => {
         const itemImgList = data.itemImgList
         // 循环图片，把头图放在第一张
         for (let i = 0; i < itemImgList.length; i++) {

@@ -47,6 +47,20 @@ class Apis extends Ajax {
   itemsInfo(params) {
     return super.get(`/api/items/info/${params.itemId}`, {})
   }
+
+  /**
+   * 商品好评数量
+   */
+  itemsCommentLevel(params) {
+    return super.get('/api/items/commentLevel', params)
+  }
+
+  /**
+   * 评论列表
+   */
+  itemsComments(params) {
+    return super.get('/api/items/comments', params)
+  }
 }
 
 const apis = new Apis(axios)
