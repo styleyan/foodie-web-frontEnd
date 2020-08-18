@@ -30,6 +30,12 @@ export default {
       type: 1,
     }
   },
+  created() {
+    const type = this.$route.query.type
+    if (type === 0 || type === '0') {
+      this.type = 0
+    }
+  },
   mounted() {
   },
   methods: {

@@ -10,6 +10,8 @@
   </div>
 </template>
 <script>
+import Cookies from 'js-cookie'
+
 export default {
   name: 'UserLogin',
   data() {
@@ -23,7 +25,11 @@ export default {
   methods: {
     loginHandle() {
       this.$axios.userLogin({ ...this.loginData }).then((data) => {
-        console.log(data)
+        this.$store.commit('updateUser', data)
+        Cookies.set('u_info', data, { expires: 365, path: '/' })
+        this.$router.push({
+          name: 'index',
+        })
       }).catch((error) => {
         console.log(error)
       })

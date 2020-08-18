@@ -3,11 +3,11 @@
     <div style="background-color:#f2f2f2; overflow:auto;border-bottom: 1px solid #e5e5e5;">
       <div class="header-top">
         <div class="header-top-l">
-          <template v-show="!userIsLogin">
-            <a href="#" class="h">亲，请登录</a>
-            <a href="#">免费注册</a>
+          <template v-if="!userInfo.nickname">
+            <router-link class="h" :to="{name: 'login'}">亲，请登录</router-link>
+            <router-link :to="{name: 'login', query: {type: 0}}">免费注册</router-link>
           </template>
-          <span v-show="userIsLogin" style="color: #d2364c">欢迎，{{userInfo.username}}</span>
+          <span v-else style="color: #d2364c">欢迎，{{userInfo.username}}</span>
         </div>
         <div class="header-top-r">
           <a href="#">商城首页</a>
@@ -27,6 +27,7 @@
 </template>
 <script>
 import logoBig from '@/assets/images/logobig.png'
+import { mapState } from 'vuex'
 
 export default {
   name: 'GlobalHeader',
@@ -34,9 +35,12 @@ export default {
     return {
       keywords: '',
       logoBig,
-      userIsLogin: false,
-      userInfo: {},
     }
+  },
+  computed: {
+    ...mapState([
+      'userInfo',
+    ]),
   },
   methods: {
     goUserCenter() {},
