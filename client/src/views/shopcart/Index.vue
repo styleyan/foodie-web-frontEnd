@@ -2,6 +2,11 @@
   <div class="shop-cart-page">
     <GlobalHeader></GlobalHeader>
     <div class="shop-cart-content">
+      <div v-if="!userInfo.id" class="nologin-tip">
+        <i class="iconfont icon-waring"></i>
+        <span class="nologin-tip-span">您还没有登录！登录后购物车的商品将保存到您账号中</span>
+        <router-link class="login-btn" :to="{name: 'login'}">立即登录</router-link>
+      </div>
       <table cellspacing="0" cellpadding="0" class="shop-cart-item">
         <thead>
           <tr>
@@ -47,6 +52,7 @@
 <script>
 import GlobalHeader from '@/components/GlobalHeader.vue'
 import GlobalFooter from '@/components/GlobalFooter.vue'
+import { mapState } from 'vuex'
 
 export default {
   name: 'ShopCart',
@@ -54,6 +60,11 @@ export default {
   data() {
     return {
     }
+  },
+  computed: {
+    ...mapState([
+      'userInfo',
+    ]),
   },
   created() {
   },
@@ -71,6 +82,36 @@ export default {
   width 1000px
   margin 0 auto
 
+  .nologin-tip{
+    border: 1px solid #edd28b;
+    background: #fffdee;
+    padding: 10px 20px;
+    line-height: 25px;
+    margin-bottom: 20px;
+    color: #f70;
+  }
+  .nologin-tip-span{
+    margin 0 12px 0 6px
+  }
+  .icon-waring{
+    vertical-align middle
+  }
+
+  .login-btn{
+    background-color: #e74649;
+    height: 25px;
+    line-height: 25px;
+    font-family: arial,"Microsoft YaHei";
+    border-radius: 3px;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 400;
+    padding: 0 10px;
+    vertical-align: middle;
+    cursor: pointer;
+    border: 0;
+    display inline-block
+  }
   .shop-cart-item{
     text-align left
     font-size 14px
