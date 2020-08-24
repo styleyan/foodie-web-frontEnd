@@ -16,10 +16,10 @@
     </dl>
     <dl class="mum-wrap">
       <dt class="left-label">数量</dt>
-      <dd class="select-number"><span>-</span><input class="num" value="1" type="text"/><span>+</span></dd>
+      <dd class="select-number"><span @click="updateNumber(false)">-</span><input class="num" v-model="num" type="text"/><span @click="updateNumber(true)">+</span></dd>
       <dd>库存{{activeSpec.stock}}件</dd>
     </dl>
-    <a href="javascript:void(0);" class="add-btn">加入购物车</a>
+    <a href="javascript:void(0);" @click="addCardHandle" class="add-btn">加入购物车</a>
   </div>
 </template>
 <script>
@@ -39,6 +39,7 @@ export default {
   data() {
     return {
       activeSpec: {},
+      num: 1,
     }
   },
   watch: {
@@ -52,6 +53,29 @@ export default {
      */
     activeHandle(item) {
       this.activeSpec = item
+    },
+    /**
+     * 数量操作
+     * @param {Boolean} bol true(加)、false(减)
+     */
+    updateNumber(bol) {
+      if (this.num >= this.activeSpec.stock) {
+        return
+      }
+      if (bol) {
+        this.num++
+      } else {
+        this.mum--
+      }
+    },
+    /**
+     * 加入购物车
+     */
+    addCardHandle() {
+      this.$store.dispatch('addShopCard', {
+        info: this.activeSpec,
+        number: this.num,
+      })
     },
   },
 }

@@ -11,7 +11,7 @@
     <div @click="toShopCardHandle" class="user-shop-car">
       <i class="iconfont icon-shop-car"></i>
       <span class="text">购<br/>物<br/>车</span>
-      <span class="num">1</span>
+      <span class="num">{{shopNumber}}</span>
     </div>
     <dl
       @mouseenter="enterInfoHandle"
@@ -27,6 +27,8 @@
   </div>
 </template>
 <script>
+import { mapState } from 'vuex'
+
 export default {
   name: 'GlobalSidebar',
   data() {
@@ -34,6 +36,11 @@ export default {
       infoStatus: false,
       timer: null,
     }
+  },
+  computed: {
+    ...mapState([
+      'shopNumber',
+    ]),
   },
   methods: {
     toShopCardHandle() {
