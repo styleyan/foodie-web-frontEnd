@@ -6,7 +6,7 @@
       <GlobalBreadcrumb :list="[{ href: '/', text: '首页' }, { href: '#', text: '分类' }, { href: '', text: '商品' }]"></GlobalBreadcrumb>
       <div style="overflow: auto">
         <GlobalZoomImg style="float:left;margin-right:30px" :itemImgList="itemInfo.itemImgList"></GlobalZoomImg>
-        <ItemAddCart :item="itemInfo.item" :itemSpecList="itemInfo.itemSpecList"></ItemAddCart>
+        <ItemAddCart :itemImages="itemInfo.itemImgList" :item="itemInfo.item" :itemSpecList="itemInfo.itemSpecList"></ItemAddCart>
       </div>
       <div class="item-detail-box">
         <ul class="item-detail-box-tab">

@@ -35,6 +35,11 @@ export default {
       type: Array,
       default: () => ([]),
     },
+    // 图片列表
+    itemImages: {
+      type: Array,
+      default: () => ([]),
+    },
   },
   data() {
     return {
@@ -73,8 +78,14 @@ export default {
      */
     addCardHandle() {
       this.$store.dispatch('addShopCard', {
-        info: this.activeSpec,
-        number: this.num,
+        itemId: this.item.id,
+        itemImgUrl: this.itemImages[0].url,
+        itemName: this.item.itemName,
+        specId: this.activeSpec.id,
+        specName: this.activeSpec.name,
+        buyCounts: this.num,
+        priceDiscount: this.activeSpec.priceDiscount,
+        priceNormal: this.activeSpec.priceNormal,
       })
     },
   },

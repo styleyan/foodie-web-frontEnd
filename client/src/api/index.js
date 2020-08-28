@@ -75,6 +75,13 @@ class Apis extends Ajax {
   userLogin(params) {
     return super.post('/api/login', params)
   }
+
+  /**
+   * 添加购物车
+   */
+  shopCartAdd(params) {
+    return super.post(`/api/shopcart/add?userId=${params.userId}`, params.shopInfo)
+  }
 }
 
 const apis = new Apis(axios)

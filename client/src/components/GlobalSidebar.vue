@@ -20,14 +20,14 @@
       <dt><img width="80" height="80" src="http://122.152.205.72:88/group1/M00/00/05/CpoxxFw_8_qAIlFXAAAcIhVPdSg994.png"/></dt>
       <dd>
         <p class="user-name">用户昵称: xiaofei.su</p>
-        <p><a href="javascript:void(0)">退出登录</a></p>
+        <p><a href="javascript:void(0)" @click="userLogout">退出登录</a></p>
       </dd>
     </dl>
     <div class="top-header"><i class="iconfont icon-to-top"></i></div>
   </div>
 </template>
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 
 export default {
   name: 'GlobalSidebar',
@@ -43,6 +43,9 @@ export default {
     ]),
   },
   methods: {
+    ...mapActions([
+      'userLogout',
+    ]),
     toShopCardHandle() {
       this.$router.push({
         name: 'shopcart',

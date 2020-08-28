@@ -1,10 +1,28 @@
 import Vuex from 'vuex'
+import apis from '../api/index'
+import Cookies from 'js-cookie'
+import router from '../router'
 
 export default new Vuex.Store({
   state: {
     // 用户信息
     userInfo: {},
-    // 购物车信息
+    /**
+     * 购物车信息, 数据结构如下:
+     * {
+     *    "商品规格id": {
+     *        itemId: '',
+     *        itemImgUrl: '',
+     *        itemName: '',
+     *        specId: '',
+     *        specName: '',
+     *        buyCounts: '',
+     *        priceDiscount: '',
+     *        priceNormal: ''
+     *    },
+     *    ...
+     * }
+     */
     shopCard: {},
     // 购物车数量
     shopNumber: 0,
@@ -20,15 +38,12 @@ export default new Vuex.Store({
      * 更新购物车信息
      */
     updateShopCard(state, shopData) {
-      const _id = shopData.info.id
+      const _id = shopData.specId
       const newShopCard = { ...state.shopCard }
       if (newShopCard[_id]) {
-        newShopCard[_id].number += shopData.number
+        newShopCard[_id].buyCounts += shopData.buyCounts
       } else {
-        newShopCard[_id] = {
-          info: shopData.info,
-          number: shopData.number,
-        }
+        newShopCard[_id] = shopData
       }
       state.shopCard = newShopCard
     },
@@ -39,8 +54,8 @@ export default new Vuex.Store({
       const keys = Object.keys(state.shopCard)
       let num = 0
 
-      keys.forEach((item) => {
-        num += state.shopCard[item].number
+      keys.forEach((key) => {
+        num += state.shopCard[key].buyCounts
       })
 
       state.shopNumber = num
@@ -50,9 +65,35 @@ export default new Vuex.Store({
     /**
      * 添加购物车
      */
-    addShopCard(store, shopData) {
-      store.commit('updateShopCard', shopData)
-      store.commit('updateShopNumber')
+    async addShopCard({ state, commit }, shopData) {
+      /**
+       * 已登录: 则需要同步到 redis 中
+       * 未登录: 同步到 cookies 或 lockstore 中
+       */
+      commit('updateShopCard', shopData)
+      commit('updateShopNumber')
+
+      const result = await apis.shopCartAdd({
+        userId: state.userInfo.id,
+        shopInfo: shopData,
+      })
+
+      console.log(result)
+    },
+    /**
+     * 从购物车中删除
+     */
+    removeShopCard(store, shopInfo) {
+
+    },
+    /**
+     * 退出登录
+     */
+    userLogout() {
+      Cookies.remove('u_info')
+      router.push({
+        name: 'login',
+      })
     },
   },
 })
