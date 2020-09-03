@@ -3,10 +3,12 @@
  */
 import axios from 'axios'
 import router from '../router'
+import Cookies from 'js-cookie'
 
 // 请求配置
 axios.interceptors.request.use((config) => {
   config.headers['X-Requested-Width'] = 'XMLHttpRequest'
+  config.headers['X-Requested-Token'] = Cookies.get('_token_')
   return config
 })
 

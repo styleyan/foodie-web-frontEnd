@@ -66,21 +66,28 @@ class Apis extends Ajax {
    * 注册账号
    */
   userRegister(params) {
-    return super.post('/api/register', params)
+    return super.post('/api/user/register', params)
   }
 
   /**
    * 登录账号
    */
   userLogin(params) {
-    return super.post('/api/login', params)
+    return super.post('/api/user/login', params)
+  }
+
+  /**
+   * 获取用户信息
+   */
+  getUserInfo() {
+    return super.get('/api/user/info');
   }
 
   /**
    * 添加购物车
    */
   shopCartAdd(params) {
-    return super.post(`/api/shopcart/add?userId=${params.userId}`, params.shopInfo)
+    return super.post('/api/shopcart/add', params)
   }
 }
 

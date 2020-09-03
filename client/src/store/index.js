@@ -65,7 +65,7 @@ export default new Vuex.Store({
     /**
      * 添加购物车
      */
-    async addShopCard({ state, commit }, shopData) {
+    async addShopCard({ commit }, shopData) {
       /**
        * 已登录: 则需要同步到 redis 中
        * 未登录: 同步到 cookies 或 lockstore 中
@@ -73,10 +73,7 @@ export default new Vuex.Store({
       commit('updateShopCard', shopData)
       commit('updateShopNumber')
 
-      const result = await apis.shopCartAdd({
-        userId: state.userInfo.id,
-        shopInfo: shopData,
-      })
+      const result = await apis.shopCartAdd({...shopData})
 
       console.log(result)
     },

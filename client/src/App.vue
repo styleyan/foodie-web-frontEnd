@@ -4,10 +4,22 @@
   </div>
 </template>
 <script>
+import Cookies from 'js-cookie'
+
 export default {
   name: 'app',
   data() {
     return {}
+  },
+  created() {
+    const _token_ = Cookies.get("_token_")
+    if (_token_) {
+      this.$axios.getUserInfo().then((data) => {
+        this.$store.commit('updateUser', data)
+      }).catch(error => {
+        console.log(error)
+      })
+    }
   },
 }
 </script>

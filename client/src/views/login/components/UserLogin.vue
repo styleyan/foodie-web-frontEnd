@@ -25,8 +25,8 @@ export default {
   methods: {
     loginHandle() {
       this.$axios.userLogin({ ...this.loginData }).then((data) => {
-        this.$store.commit('updateUser', data)
-        Cookies.set('u_info', data, { expires: 365, path: '/' })
+        this.$store.commit('updateUser', data.user)
+        Cookies.set('_token_', data.token, { expires: 365, path: '/' })
         this.$router.push({
           name: 'index',
         })
