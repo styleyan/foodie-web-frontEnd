@@ -16,9 +16,12 @@ export default {
     if (_token_) {
       this.$axios.getUserInfo().then((data) => {
         this.$store.commit('updateUser', data)
+        this.$store.dispatch('mergerShopCard')
       }).catch(error => {
         console.log(error)
       })
+    } else {
+      this.$store.dispatch('mergerShopCard')
     }
   },
 }

@@ -18,20 +18,20 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="(item,index) in [1,2,3]" :key="index">
+          <tr v-for="(item,index) in shopCard" :key="index">
             <td class="shop-info">
               <dl class="shop-info-dl">
                 <dt><input type="checkbox"/></dt>
-                <dd class="img"><img src="http://122.152.205.72:88/foodie/bingan-1005/img1.png" width="80" height="80"/></dd>
+                <dd class="img"><img :src="item.itemImgUrl" width="80" height="80"/></dd>
                 <dd>
-                  <a class="name" href="#">【天天吃货】夹心吐司面包 早餐面包 早点早饭</a>
-                  <span class="sku-line">规格：巧克力</span>
+                  <a class="name" href="#">{{item.itemName}}</a>
+                  <span class="sku-line">规格：{{item.specName}}</span>
                 </dd>
               </dl>
             </td>
-            <td class="shop-price"><del class="raw">220</del><b>198</b></td>
-            <td class="shop-num">1</td>
-            <td class="shop-money">198</td>
+            <td class="shop-price"><del class="raw">{{item.priceNormal / 100}}</del><b>{{item.priceDiscount / 100}}</b></td>
+            <td class="shop-num">{{item.buyCounts}}</td>
+            <td class="shop-money">{{item.priceDiscount / 100}}</td>
             <td class="shop-edit"><span class="del-edit">删除</span></td>
           </tr>
         </tbody>
@@ -64,6 +64,7 @@ export default {
   computed: {
     ...mapState([
       'userInfo',
+      'shopCard',
     ]),
   },
   created() {

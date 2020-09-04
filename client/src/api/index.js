@@ -89,6 +89,20 @@ class Apis extends Ajax {
   shopCartAdd(params) {
     return super.post('/api/shopcart/add', params)
   }
+
+  /**
+   * 获取购物车数据
+   */
+  getShopCarts(params) {
+    return super.get('/api/shopcart/query', params)
+  }
+
+  /**
+   * 合并购物车数据
+   */
+  mergeShopCarts(params) {
+    return super.post('/api/shopcart/merge', params)
+  }
 }
 
 const apis = new Apis(axios)

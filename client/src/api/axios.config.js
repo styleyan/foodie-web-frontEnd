@@ -8,7 +8,11 @@ import Cookies from 'js-cookie'
 // 请求配置
 axios.interceptors.request.use((config) => {
   config.headers['X-Requested-Width'] = 'XMLHttpRequest'
-  config.headers['X-Requested-Token'] = Cookies.get('_token_')
+  const _token_ = Cookies.get('_token_')
+
+  if (_token_) {
+    config.headers['X-Requested-Token'] = _token_
+  }
   return config
 })
 
