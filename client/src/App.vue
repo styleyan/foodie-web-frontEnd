@@ -12,7 +12,7 @@ export default {
     return {}
   },
   created() {
-    const _token_ = Cookies.get("_token_")
+    const _token_ = Cookies.get('_token_')
     if (_token_) {
       this.$axios.getUserInfo().then((data) => {
         this.$store.commit('updateUser', data)

@@ -21,7 +21,7 @@
           <tr v-for="(item,index) in shopCard" :key="index">
             <td class="shop-info">
               <dl class="shop-info-dl">
-                <dt><input type="checkbox"/></dt>
+                <dt><input v-model="checkedSpecId" :value="item.specId" type="checkbox"/></dt>
                 <dd class="img"><img :src="item.itemImgUrl" width="80" height="80"/></dd>
                 <dd>
                   <a class="name" href="#">{{item.itemName}}</a>
@@ -38,7 +38,7 @@
       </table>
       <div class="float-bar-wrapper">
         <div class="bar-left">
-          <input type="checkbox"/>全选
+          <input v-model="checkAllStatus" type="checkbox"/>全选
         </div>
         <div class="bar-right">
           已选商品&nbsp;0&nbsp;件&nbsp;&nbsp;合计:&nbsp;<strong class="price">¥<em>0</em>元</strong>
@@ -59,6 +59,10 @@ export default {
   components: { GlobalHeader, GlobalFooter },
   data() {
     return {
+      // 已选商品id
+      checkedSpecId: [],
+      // 全选状态
+      checkAllStatus: false,
     }
   },
   computed: {
@@ -66,6 +70,20 @@ export default {
       'userInfo',
       'shopCard',
     ]),
+  },
+  watch: {
+    checkAllStatus(val) {
+      if (val) {
+        const keys = Object.keys(this.shopCard)
+        const specIdList = []
+        keys.forEach(key => {
+          specIdList.push(this.shopCard[key].specId)
+        })
+        this.checkedSpecId = specIdList
+      } else {
+        this.checkedSpecId = []
+      }
+    },
   },
   created() {
   },

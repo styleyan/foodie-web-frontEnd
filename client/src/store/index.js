@@ -51,8 +51,7 @@ export default new Vuex.Store({
      * 未登录更新
      */
     noLoginUpdateCard(state, shopData) {
-      let ckShop = Cookies.getJSON("shopCard") || {};
-
+      let ckShop = Cookies.getJSON('shopCard') || {}
 
       if (!ckShop[shopData.itemId]) {
         ckShop[shopData.itemId] = shopData
@@ -103,7 +102,7 @@ export default new Vuex.Store({
      * 合并购物车
      */
     async mergerShopCard({ commit, state }) {
-      let ckShop = Cookies.getJSON("shopCard")
+      let ckShop = Cookies.getJSON('shopCard')
       // 用户未登录，直接登录同步到购物车中
       if (!state.userInfo.id) {
         commit('initCard', ckShop || {})
@@ -114,7 +113,7 @@ export default new Vuex.Store({
       // 登录情况下直接同步到服务器
       if (ckShop) {
         await apis.mergeShopCarts({ ...ckShop })
-        Cookies.remove("shopCard")
+        Cookies.remove('shopCard')
       }
 
       // 重新获取
