@@ -103,6 +103,13 @@ class Apis extends Ajax {
   mergeShopCarts(params) {
     return super.post('/api/shopcart/merge', params)
   }
+
+  /**
+   * 删除购物车
+   */
+  deleteShopCart(params) {
+    return super.post('/api/shopcart/del', params)
+  }
 }
 
 const apis = new Apis(axios)

@@ -35,6 +35,12 @@ export default new Vuex.Store({
       state.userInfo = userInfo
     },
     /**
+     * 初始化购物车
+     */
+    initCard(state, cards) {
+      state.shopCard = cards
+    },
+    /**
      * 更新购物车信息
      */
     updateShopCard(state, shopData) {
@@ -53,20 +59,14 @@ export default new Vuex.Store({
     noLoginUpdateCard(state, shopData) {
       let ckShop = Cookies.getJSON('shopCard') || {}
 
-      if (!ckShop[shopData.itemId]) {
-        ckShop[shopData.itemId] = shopData
+      if (!ckShop[shopData.specId]) {
+        ckShop[shopData.specId] = shopData
       } else {
-        ckShop[shopData.itemId].buyCounts = ckShop[shopData.itemId].buyCounts + shopData.buyCounts
+        ckShop[shopData.specId].buyCounts = ckShop[shopData.specId].buyCounts + shopData.buyCounts
       }
 
       Cookies.set('shopCard', ckShop)
       state.shopCard = ckShop
-    },
-    /**
-     * 初始化购物车
-     */
-    initCard(state, cards) {
-      state.shopCard = cards
     },
     /**
      * 更新购物车数量
@@ -80,6 +80,19 @@ export default new Vuex.Store({
       })
 
       state.shopNumber = num
+    },
+    /**
+     * 删除购物车
+     */
+    deleteShopCard(state, shopData) {
+      const newCard = {}
+      Object.keys(state.shopCard).forEach((key) => {
+        if (key !== shopData.specId) {
+          newCard[key] = state.shopCard[key]
+        }
+      })
+      Cookies.set('shopCard', newCard)
+      state.shopCard = newCard
     },
   },
   actions: {
@@ -126,8 +139,16 @@ export default new Vuex.Store({
     /**
      * 从购物车中删除
      */
-    removeShopCard({ commit, state }, shopInfo) {
+    async removeShopCard({ commit, state }, shopInfo) {
+      if (state.userInfo.id) {
+        const result = await apis.deleteShopCart([shopInfo.specId]).then(() => true).catch(() => false)
 
+        if (!result) {
+          return
+        }
+      }
+      commit('deleteShopCard', shopInfo)
+      commit('updateShopNumber')
     },
     /**
      * 退出登录

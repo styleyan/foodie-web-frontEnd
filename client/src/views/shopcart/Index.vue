@@ -32,7 +32,7 @@
             <td class="shop-price"><del class="raw">{{item.priceNormal / 100}}</del><b>{{item.priceDiscount / 100}}</b></td>
             <td class="shop-num">{{item.buyCounts}}</td>
             <td class="shop-money">{{item.priceDiscount / 100}}</td>
-            <td class="shop-edit"><span class="del-edit">删除</span></td>
+            <td class="shop-edit"><span @click="deleteShopHandle(item)" class="del-edit">删除</span></td>
           </tr>
         </tbody>
       </table>
@@ -41,7 +41,7 @@
           <input v-model="checkAllStatus" type="checkbox"/>全选
         </div>
         <div class="bar-right">
-          已选商品&nbsp;0&nbsp;件&nbsp;&nbsp;合计:&nbsp;<strong class="price">¥<em>0</em>元</strong>
+          已选商品&nbsp;{{totalNum}}&nbsp;件&nbsp;&nbsp;合计:&nbsp;<strong class="price">¥<em>{{totalMoney}}</em>元</strong>
           <a @click="toPayHandle" href="javascript:void(0)" class="btn-area">结算</a>
         </div>
       </div>
@@ -63,6 +63,10 @@ export default {
       checkedSpecId: [],
       // 全选状态
       checkAllStatus: false,
+      // 合计金额
+      totalMoney: 0,
+      // 商品件数
+      totalNum: 0,
     }
   },
   computed: {
@@ -84,15 +88,37 @@ export default {
         this.checkedSpecId = []
       }
     },
+    checkedSpecId(newValue) {
+      let totalMoney = 0
+      let totalNum = 0
+
+      newValue.forEach((key) => {
+        const curShop = this.shopCard[key]
+        totalNum = curShop.buyCounts + totalNum
+        totalMoney = totalMoney + (curShop.buyCounts * curShop.priceDiscount)
+      })
+
+      this.totalMoney = totalMoney / 100
+      this.totalNum = totalNum
+    },
   },
   created() {
   },
   methods: {
+    /**
+     * 前往支付
+     */
     toPayHandle() {
       this.$router.push({
         name: 'order',
       })
     },
+    /**
+     * 删除当个订单
+     */
+    deleteShopHandle(item) {
+      this.$store.dispatch('removeShopCard', item)
+    }
   },
 }
 </script>
