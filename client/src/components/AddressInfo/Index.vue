@@ -1,22 +1,12 @@
 <template>
   <div class="address-info">
     <ul>
-      <li class="default">
-        <h4>等等&nbsp;&nbsp;1881021818333</h4>
+      <li v-for="(item, index) in addressList" :key="index" :class="item.isDefault ? 'default' :''">
+        <h4>{{item.receiver}}&nbsp;&nbsp;{{item.mobile}}</h4>
         <dl>
           <dt>收货地址：</dt>
-          <dd>浙江杭州滨江小伙子</dd>
-          <dd class="edit"><a href="#">编辑</a><span class="line">|</span><a href="#">删除</a></dd>
-        </dl>
-        <ins class="deftip">默认地址</ins>
-      </li>
-
-      <li>
-        <h4>等等&nbsp;&nbsp;1881021818333</h4>
-        <dl>
-          <dt>收货地址：</dt>
-          <dd>浙江杭州滨江小伙子</dd>
-          <dd class="edit"><a href="#">设为默认</a><span class="line">|</span><a href="#">编辑</a><span class="line">|</span><a href="#">删除</a></dd>
+          <dd>{{`${item.province}${item.city}${item.district}${item.detail}`}}</dd>
+          <dd class="edit"><a href="javascript:void(0)">编辑</a><span class="line">|</span><a href="javascript:void(0)" @click="deleteHandle(item)">删除</a></dd>
         </dl>
         <ins class="deftip">默认地址</ins>
       </li>
@@ -28,8 +18,33 @@ export default {
   name: 'AddressInfo',
   data() {
     return {
-
+      addressList: [],
     }
+  },
+  created() {
+    this.getList()
+  },
+  methods: {
+    /**
+     * 获取列表
+     */
+    getList() {
+      this.$axios.addressList().then((data) => {
+        this.addressList = data
+      }).catch((error) => {
+        console.log(error)
+      })
+    },
+    /**
+     * 删除
+     */
+    deleteHandle(item) {
+      this.$axios.addressDelete({ addressId: item.id }).then(() => {
+        this.getList()
+      }).catch((error) => {
+        console.log(error)
+      })
+    },
   },
 }
 </script>

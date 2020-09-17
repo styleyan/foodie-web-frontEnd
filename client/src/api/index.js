@@ -80,7 +80,7 @@ class Apis extends Ajax {
    * 获取用户信息
    */
   getUserInfo() {
-    return super.get('/api/user/info');
+    return super.get('/api/user/info')
   }
 
   /**
@@ -109,6 +109,41 @@ class Apis extends Ajax {
    */
   deleteShopCart(params) {
     return super.post('/api/shopcart/del', params)
+  }
+
+  /**
+   * 收货地址列表
+   */
+  addressList(params) {
+    return super.get('/api/address/list', params)
+  }
+
+  /**
+   * 添加收货地址
+   */
+  addressAdd(params) {
+    return super.post('/api/address/add', params)
+  }
+
+  /**
+   * 更新收货地址
+   */
+  addressUpdate(params) {
+    return super.post('/api/address/update', params)
+  }
+
+  /**
+   * 删除收货地址
+   */
+  addressDelete(params) {
+    return super.post(`/api/address/delete/${params.addressId}`, params)
+  }
+
+  /**
+   * 设置默认收货地址
+   */
+  addressSetDefault(params) {
+    return super.post(`/api/setDefault/delete/${params.addressId}`, params)
   }
 }
 
